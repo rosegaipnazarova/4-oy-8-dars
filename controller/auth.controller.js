@@ -70,9 +70,12 @@ const login = async(req,res) =>{
 
         if (check) {
             const payload= {id: foundedUser.id, email: foundedUser.email, role: foundedUser.role }
-            const token = jwt.sign(payload, )
+            const token = jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: "1h"})
 
-            
+            res.status(200).json({
+                message: "success",
+                token
+            })
         }else{
             res.status(401).json({
                 message: "wrong password"
@@ -80,11 +83,6 @@ const login = async(req,res) =>{
         }
 
 
-
-        write_file("auth.json", fileData)
-        res.status(201).json({
-            message : "Registered"
-        })
 
 
     }catch(error){

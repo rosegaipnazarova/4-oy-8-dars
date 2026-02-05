@@ -1,6 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const authRouter = require("./router/auth.routes")
+const productRouter = require("./router/product.routes")
 require("dotenv").config()
 
 const app = express()
@@ -12,7 +13,7 @@ app.use(cors())
 //router
 
 app.use(authRouter)
-
+app.use(productRouter)
 
 app.listen(PORT, () => {
     console.log(PORT);
